@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Doodle Jump Clone</title>
+    <link rel="stylesheet" href="/src/style.css">
+  </head>
+  <body>
+    <div id="game-container">
+      <canvas id="gameCanvas"></canvas>
+      
+      <!-- Login Overlay -->
+      <div id="login-overlay" class="overlay">
+        <h1>Doodle Jump</h1>
+        <p>Clone</p>
+        <button id="login-btn" class="btn">Sign in with Google</button>
+        <div id="leaderboard-preview">
+          <h3>Top Scores</h3>
+          <ul id="score-list-preview"></ul>
+        </div>
+      </div>
+
+      <!-- Game Over Overlay -->
+      <div id="game-over-overlay" class="overlay hidden">
+        <h1>Game Over</h1>
+        <p>Score: <span id="final-score">0</span></p>
+        <button id="restart-btn" class="btn">Play Again</button>
+        <div id="leaderboard-full">
+          <h3>Global Leaderboard</h3>
+          <ul id="score-list-full"></ul>
+        </div>
+      </div>
+      
+      <!-- HUD -->
+      <div id="hud" class="hidden">
+        <div id="score-display">Score: 0</div>
+        <div id="user-display"></div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

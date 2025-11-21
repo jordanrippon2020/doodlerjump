@@ -12,7 +12,7 @@ export class Jetpack {
         this.y = y;
     }
 
-    update(canvasWidth: number) {
+    update(_canvasWidth: number) {
         // Static until picked up
     }
 

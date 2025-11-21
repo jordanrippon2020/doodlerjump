@@ -12,7 +12,7 @@ export class BlackHole {
         this.y = y;
     }
 
-    update(canvasWidth: number) {
+    update(_canvasWidth: number) {
         this.angle += 0.1;
     }
 

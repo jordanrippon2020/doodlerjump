@@ -12,7 +12,7 @@ export class Trampoline {
         this.y = y;
     }
 
-    update(canvasWidth: number) {
+    update(_canvasWidth: number) {
         // Static relative to platform usually, but here just exists
     }
 

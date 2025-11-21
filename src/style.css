@@ -13,7 +13,7 @@ body {
     position: relative;
     width: 400px;
     height: 600px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
 canvas {
@@ -96,4 +96,21 @@ li:last-child {
     pointer-events: none;
     font-size: 20px;
     font-weight: bold;
+}
+
+#nickname-section {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 80%;
+}
+
+.nickname-input {
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-family: inherit;
+    text-align: center;
 }

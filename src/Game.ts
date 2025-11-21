@@ -43,6 +43,10 @@ export class Game {
     finalScoreDisplay!: HTMLElement;
     scoreListPreview!: HTMLElement;
     scoreListFull!: HTMLElement;
+    nicknameSection!: HTMLElement;
+    nicknameInput!: HTMLInputElement;
+    startGameBtn!: HTMLButtonElement;
+    playerNickname: string = 'Guest';
 
     constructor(canvas: HTMLCanvasElement) {
         this.canvas = canvas;
@@ -63,8 +67,8 @@ export class Game {
         this.auth = new Auth((user) => {
             this.updateUserDisplay(user);
             if (user) {
-                this.loginBtn.textContent = `Signed in as ${user.displayName}`;
-                this.loginBtn.disabled = true;
+                this.loginBtn.classList.add('hidden');
+                this.nicknameSection.classList.remove('hidden');
             }
         });
 
@@ -83,8 +87,22 @@ export class Game {
         this.finalScoreDisplay = document.getElementById('final-score')!;
         this.scoreListPreview = document.getElementById('score-list-preview')!;
         this.scoreListFull = document.getElementById('score-list-full')!;
+        this.nicknameSection = document.getElementById('nickname-section')!;
+        this.nicknameInput = document.getElementById('nickname-input') as HTMLInputElement;
+        this.startGameBtn = document.getElementById('start-game-btn') as HTMLButtonElement;
 
         this.loginBtn.addEventListener('click', () => this.auth.signIn());
+
+        this.startGameBtn.addEventListener('click', () => {
+            const nickname = this.nicknameInput.value.trim();
+            if (nickname.length < 2) {
+                alert('Please enter a nickname (at least 2 characters)');
+                return;
+            }
+            this.playerNickname = nickname;
+            this.startGame();
+        });
+
         this.restartBtn.addEventListener('click', () => {
             this.reset();
             this.state = 'PLAYING';
@@ -94,9 +112,18 @@ export class Game {
         });
     }
 
+    startGame() {
+        SoundUtils.init();
+        this.reset();
+        this.state = 'PLAYING';
+        this.loginOverlay.classList.add('hidden');
+        this.hud.classList.remove('hidden');
+        SoundUtils.playPowerup();
+    }
+
     updateUserDisplay(user: any) {
         if (user) {
-            this.userDisplay.textContent = user.displayName;
+            this.userDisplay.textContent = this.playerNickname || 'Guest';
         } else {
             this.userDisplay.textContent = 'Guest';
         }
@@ -421,7 +448,7 @@ export class Game {
         if (this.auth.currentUser) {
             await this.leaderboard.submitScore(
                 this.auth.currentUser.uid,
-                this.auth.currentUser.displayName || 'Anonymous',
+                this.playerNickname,
                 this.score,
                 this.auth.currentUser.photoURL
             );

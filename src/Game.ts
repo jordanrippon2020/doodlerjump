@@ -160,7 +160,6 @@ export class Game {
     }
 
     loop(timestamp: number) {
-        const _deltaTime = timestamp - this.lastTime;
         this.lastTime = timestamp;
 
         this.update(timestamp);
